@@ -1,0 +1,222 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <script src="jquery-3.7.1.js" sourcemappingurl="jquery-3.7.1.min.map"></script>
+ 
+  <script src="jquery-ui-1.13.3.custom/jquery-ui-1.13.3.custom/jquery-ui.js"></script>
+  <script src="jquery-connections-gh-pages/jquery-connections-gh-pages/jquery.connections.js"></script>
+  
+  <link rel="stylesheet" href="jquery-ui-1.13.3.custom/jquery-ui-1.13.3.custom/jquery-ui.css">
+  
+
+<style>
+.line_connect{
+	height: 20px;
+	width: 17px;
+	
+	background-color: skyblue;
+	float: left;
+}
+
+.close_connect{
+	height: 20px;
+	width: 17px;
+	
+	background-color: red;
+	float: left;
+}
+
+
+.connect_style{
+width: 200px;
+position: fixed;
+border: 1px solid lightgray;
+left: 100px;
+}
+.connect_area{
+width: 100px;
+height: 50px;
+
+}
+
+#connect_head{
+
+width: 66px;
+height: 20px;
+background: lightgray;
+float:left;
+
+
+	width: -webkit-calc(100% - 34px);
+    width:    -moz-calc(100% - 34px);
+    width:         calc(100% - 34px);
+}
+
+
+connection {
+  border: 7px solid skyblue;
+  border-radius: 30px;
+}
+
+</style>
+
+
+
+<!--<input type="text" id="connect_line_1" style="display: none;"/><input type="text" id="connect_line_2" style="display: none;"/>-->
+<input type="text" id="connect_line_1" /><input type="text" id="connect_line_2" />
+
+
+<div id="connect_lines_container" style="height: 100%; width: 100%;">
+	
+</div>
+
+<!--
+<br/><br/><br/><br/>
+<div id="end">end</div>
+-->
+<script>
+window.addEventListener('load', function() {
+
+
+
+
+
+
+//var c = $('moving');
+setInterval(function() {
+
+  $('.moving').connections('update');
+}, 500);
+
+
+
+
+
+
+
+
+
+var connect_container_i = 0;
+
+var ii = 0;
+
+addEventListener("contextmenu", function(event){
+	connect_container_i++;
+	//recognition.start();
+	console.log("context");
+	
+	$("#connect_lines_container").append("<div id='container_oktopus"+connect_container_i+"' class='connect_style'><div id='line_connect"+connect_container_i+"' class='line_connect'>‭→</div>‭<div id='connect_head'></div><div id='close_connect"+connect_container_i+"' class='close_connect'>‭ x</div><br clear='both'/><iframe src='draw.html' style='height: 100%; width: 100%; border: 0px;' scrolling='no' ></iframe></div>");
+	
+	
+			
+			window['container_oktopus' + connect_container_i].style.left = event.pageX;
+			window['container_oktopus' + connect_container_i].style.top = event.pageY;
+			
+			
+			
+			
+			
+			
+	event.preventDefault();
+
+
+
+
+
+			
+			
+			$("#connect_line_1").val("");
+			$("#connect_line_2").val("");
+			
+			
+			
+			var oktoputs_container_num = document.getElementById('container_oktopus'+connect_container_i);
+			
+			//oktoputs_container_num.append(transcript);
+			
+			
+			
+			for (let i = 0; i <= connect_container_i; i++) {
+			  //text += cars[i] + "<br>";
+			  
+			  var oktoputs_container_select = document.getElementById('container_oktopus'+i);
+			  
+			  
+			$( "#container_oktopus" + i ).draggable();
+		    $( "#container_oktopus" + i ).resizable();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			$("#line_connect"+i).on("click", function(){
+			
+				if($("#connect_line_1").val() == ""){
+					document.getElementById("connect_line_1").value = "container_oktopus"+i;
+				}else{
+					document.getElementById("connect_line_2").value = "container_oktopus"+i;
+				}
+				
+				if($("#connect_line_1").val() !== "" && $("#connect_line_2").val() !== ""){
+					
+					
+					
+					
+					$('#'+document.getElementById("connect_line_1").value).connections({ to: '#'+document.getElementById("connect_line_2").value, 'class': 'moving'});
+					
+					
+					
+					$("#connect_line_1").val("");
+					$("#connect_line_2").val("");
+					
+					
+				}
+			
+			
+				setTimeout(function() {
+
+				  $("#connect_line_1").val("");
+				  $("#connect_line_2").val("");
+						
+				}, 10000);
+			
+			
+			
+			});
+			
+			
+			
+			$("#close_connect"+i).on("click", function(){
+
+				console.log("close");
+				
+				
+				$("#container_oktopus"+i).hide();
+
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			}
+			//transcript = "";
+			
+		//};
+		});
+		
+		
+		
+
+
+});
+
+</script>
